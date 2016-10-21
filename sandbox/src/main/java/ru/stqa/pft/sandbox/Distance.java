@@ -6,10 +6,11 @@ public class Distance {
 
         Point p1 = new Point(0, 0);
         Point p2 = new Point(3, 4);
+        Points p3 = new Points(0,0,3,4);
 
         System.out.println("distance = "+ distance(p1,p2));
 
-        System.out.println("distance = "+ p1.distance2());
+        System.out.println("distance = "+ p3.distance2());
 
 
     }
