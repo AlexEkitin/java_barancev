@@ -11,9 +11,9 @@ public class Point {
         this.y=y;
     }
 
-    //public double distance(){
-    //    Math.sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y))
-    //}
+    public double distance2(){
+    return Math.sqrt((this.x-this.x)*(this.x-this.x)+(this.y-this.y)*(this.y-this.y));
+    }
 
 
 
