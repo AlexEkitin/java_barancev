@@ -5,12 +5,13 @@ public class Program {
     public static void main(String[] args) {
         hello("User");
         hello("144");
-        double l = 5;
-        System.out.println("area = "+ l+ " = " + area(l));
 
-        double a = 5;
-        double b = 7;
-        System.out.println("area 2 = "+ a + " * "+b +" = " + area(a, b));
+        Square s = new Square(5);
+        System.out.println("area = "+ s.l+ " = " + s.area());
+
+        Rectangle r = new Rectangle(5,7);
+
+        System.out.println("area 2 = "+ r.a + " * "+r.b +" = " + r.area());
 
         //double l=8;
         //double s = l*l;
@@ -22,13 +23,9 @@ public class Program {
         System.out.println("Hello, "+sombody+"!");
     }
 
-    public static double area(double len){
-        return len * len;
-    }
 
-    public static double area (double a, double b){
-        return a * b;
-    }
+
+
 
 
 }
