@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: org.testng:testng:6.9.13.6">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/sandbox/Cannot resolve external dependency org.testng:testng:6.9.13.6 because no repositories are defined." />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.testng/testng/6.9.13.6/e93ec1cd3be2d256d0f9d5ebc017911e48805c87/testng-6.9.13.6.jar!/" />
     </CLASSES>
     <JAVADOC />
