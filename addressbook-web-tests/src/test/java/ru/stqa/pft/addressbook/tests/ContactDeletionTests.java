@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class ContactDeletionTests extends TestBase {
 
 
-    //@Test
+    @Test
     public void atestContactDeletionFromEdit() {
         app.getNavigationHelper().gotoHomePage();
         app.getContactHelper().chooseEditContact();
