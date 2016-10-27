@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
-    ChromeDriver wd;
 
     //constructor for wd
     public ContactHelper(ChromeDriver wd) {
@@ -38,7 +37,7 @@ public class ContactHelper extends HelperBase {
 
     public void deleteSelectContacts() {
         click(By.xpath("//div[2]/input"));
-        //wd.switchTo().alert().accept();
+        wd.switchTo().alert().accept();
     }
 
     public void chooseEditContact() {
