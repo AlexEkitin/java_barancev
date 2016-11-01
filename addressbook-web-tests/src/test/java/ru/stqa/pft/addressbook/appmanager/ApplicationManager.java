@@ -33,7 +33,7 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
         wd = new ChromeDriver();
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         // initialisation
         // wd - parameter in constructor for all helpers
