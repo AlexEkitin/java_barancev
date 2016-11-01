@@ -11,18 +11,20 @@ public class NavigationHelper extends HelperBase {
         super(wd);
     }
 
+    //check: if we are on the correct page, don't click
     public void gotoGroupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && wd.findElement(By.tagName("h1")).getText().equals("Groups")
-                && isElementPresent(By.name("new"))){
+                && isElementPresent(By.name("new"))) {
             return;
         }
         click(By.linkText("groups"));
-        
+
     }
 
+    //check: if we are on the correct page, don't click
     public void gotoHomePage() {
-        if (isElementPresent(By.id("maintable"))){
+        if (isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home"));
