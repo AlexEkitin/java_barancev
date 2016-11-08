@@ -38,7 +38,6 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
         click(By.name("selected[]"));
     }
 
