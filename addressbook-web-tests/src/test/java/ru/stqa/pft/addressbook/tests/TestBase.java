@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
     //created new object
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.IE);
+    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
     @BeforeMethod
     public void setUp() throws Exception {
