@@ -70,4 +70,9 @@ public class ContactHelper extends HelperBase {
     public boolean isThereAContact() {
         return isElementPresent(By.cssSelector("img[alt=\"Edit\"]"));
     }
+
+    public int getContactCount() {
+        //nahodit vse elementi i vozvrashaet list, iv nego berem size()
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
