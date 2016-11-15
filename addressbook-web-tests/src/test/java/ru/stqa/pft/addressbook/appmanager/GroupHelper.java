@@ -72,8 +72,9 @@ public class GroupHelper extends HelperBase {
         //probegaem po spisku elementov i izvlekaem iz kazdogo tekst - imia gruppi i id
         for (WebElement element : elements) {
             String name = element.getText();
-            //isem odin element vnutri drugova po tegu "input", i berem u nego atribut "value"
-            String id = element.findElement(By.tagName("input")).getAttribute("value");
+            //isem odin element vnutri drugova po tegu "input", i berem u nego atribut "value"...
+            //... i preobrazovivaem stroku v chislo
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             //sozdaem obekt "group" tipa GroupData, mi znaem tolko imya,
             // poetomu ostalnie znachenia (header i footer) zapolniaem "null"
             GroupData group = new GroupData(id, name, null, null);
