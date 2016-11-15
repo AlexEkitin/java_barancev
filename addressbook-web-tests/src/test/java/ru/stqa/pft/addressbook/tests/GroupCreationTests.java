@@ -19,18 +19,11 @@ public class GroupCreationTests extends TestBase {
         List<GroupData> after = app.getGroupHelper().getGroupList();
         Assert.assertEquals(before.size() + 1, after.size());
 
-        //u novoi gruppi maksimalnii id, mi vichislaem max id ispolzuia cikl
-        //zadaem nachalnoe znachenie dla peremennoi max
-        int max = 1;
-        //g - eto uslovnaia ssilka na konkretnii element spiska
-        //after - spisok, v kotorom mi ishem max element
-        for (GroupData g : after) {
-            if (g.getId() > max) {
-                max = g.getId();
-            }
-        }
-        //v konce cikla mi nahodim max id i prisvaevaem ego obektu "group"
-        group.setId(max);
+        //v sozdannom elemente budet samii bolsoi id, i dla ego nahozdenia mi dolzni
+        //proitis po vsemu spisku, sravnit vse elementi poocheredi i vibtam max id:
+        //list prevresaem v stream, po nemu prohodit specialnaia funkcia sravnenia i sravnivaet
+        //ih id, iz gruppi s max id berem id i peredaem v group.setId()
+        group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         //v starii spisok dobavili tu gruppu, kotoruyu mi realno sozdali na saite
         before.add(group);
         //preobrazuem list v set (HashSet<Object>) i sravnim ih
