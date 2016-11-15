@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -30,7 +31,15 @@ public class GroupModificationTests extends TestBase {
         before.remove(before.size() - 1);
         //...dobavim novii element, kotorii poyavitsa posle modifikacii s parametrami "group"
         before.add(group);
-        //preobrazuem list v set (HashSet<Object>) i sravnim ih
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        //sravnivaem elementi spiska po id
+        //Comparator - opisanie pravil sravneniia
+        //byId - localnaya peremennaya
+        //funkcia na vhod prinimaet 2 parametra -2 gruppi, i sravnivaet ih id
+        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(),g1.getId());
+        //spiski sortiruem po id
+        before.sort(byId);
+        after.sort(byId);
+        //sravnivaem 2 spiska
+        Assert.assertEquals(before, after);
     }
 }
