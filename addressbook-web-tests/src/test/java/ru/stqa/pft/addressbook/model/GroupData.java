@@ -22,4 +22,29 @@ public class GroupData {
     public String getFooter() {
         return footer;
     }
+
+    @Override
+    //metod opisivaet pravila sravneniia obektov tipa "GroupData"
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GroupData groupData = (GroupData) o;
+
+        return name != null ? name.equals(groupData.name) : groupData.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    //pri oshibke pokazivaet vmesto neponiatnih cifr nazvanie obekta
+    public String toString() {
+        return "GroupData{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

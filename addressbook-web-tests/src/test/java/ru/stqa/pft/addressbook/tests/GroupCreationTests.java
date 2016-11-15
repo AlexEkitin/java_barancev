@@ -13,7 +13,7 @@ public class GroupCreationTests extends TestBase {
         app.getNavigationHelper().gotoGroupPage();
         //spisok obektov tipa <GroupData>
         List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().createGroup(new GroupData("groupname1", "header1", "footer1"));
+        app.getGroupHelper().createGroup(new GroupData("groupname2", "header1", "footer1"));
         List<GroupData> after = app.getGroupHelper().getGroupList();
         Assert.assertEquals(before.size() + 1, after.size());
     }
