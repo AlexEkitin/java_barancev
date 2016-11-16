@@ -14,15 +14,21 @@ public class ContactDeletionTests extends TestBase {
     public void testContactDeletion() {
         app.getNavigationHelper().gotoHomePage();
 
-        if (! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().createContact(new ContactData("firstname", "lastname", "groupname1"));
+        if (!app.getContactHelper().isThereAContact()) {
+            app.getContactHelper().createContact(new ContactData("firstname1", "lastname1", "groupname1"));
         }
 
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectContacts();
         List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(before.size() - 1 , after.size());
+        Assert.assertEquals(before.size() - 1, after.size());
+
+        //udalaem iz before tot element, kotorii mi udalili so stranici
+        before.remove(before.size() - 1);
+        //stavnivaem dva spiska
+        Assert.assertEquals(before, after);
+
 
     }
 }
