@@ -14,7 +14,7 @@ public class GroupCreationTests extends TestBase {
         app.goTo().groupPage();
         //spisok obektov tipa <GroupData>
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("groupname1", "header1", "footer1");
+        GroupData group = new GroupData().withName("groupname1");
         app.group().create(group);
         List<GroupData> after = app.group().list();
         Assert.assertEquals(before.size() + 1, after.size());

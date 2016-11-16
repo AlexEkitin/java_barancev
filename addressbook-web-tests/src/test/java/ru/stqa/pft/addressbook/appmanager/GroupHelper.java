@@ -69,6 +69,7 @@ public class GroupHelper extends HelperBase {
         deleteSelectedGroups();
         returnToGroupPage();
     }
+
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -88,11 +89,10 @@ public class GroupHelper extends HelperBase {
             //isem odin element vnutri drugova po tegu "input", i berem u nego atribut "value"...
             //... i preobrazovivaem stroku v chislo
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            //sozdaem obekt "group" tipa GroupData, mi znaem tolko imya,
-            // poetomu ostalnie znachenia (header i footer) zapolniaem "null"
-            GroupData group = new GroupData(id, name, null, null);
-            //dobavlaem sozdannii obekt "group" v spisok
-            groups.add(group);
+            //sozdaem obekt tipa GroupData, mi znaem tolko imya,
+            //poetomu ostalnie znachenia (header i footer) ne zapolniaem
+            //dobavlaem sozdannii obekt  v spisok
+            groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
     }
