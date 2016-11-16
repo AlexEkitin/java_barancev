@@ -12,7 +12,7 @@ public class NavigationHelper extends HelperBase {
     }
 
     //check: if we are on the correct page, don't click
-    public void gotoGroupPage() {
+    public void groupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && wd.findElement(By.tagName("h1")).getText().equals("Groups")
                 && isElementPresent(By.name("new"))) {

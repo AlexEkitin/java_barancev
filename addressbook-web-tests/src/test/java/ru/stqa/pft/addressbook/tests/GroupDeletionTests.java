@@ -11,29 +11,28 @@ public class GroupDeletionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions(){
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("groupname1", "header1", "footer1"));
+        app.goTo().groupPage();
+        if (app.group().list().size() == 0){
+            app.group().create(new GroupData("groupname1", "header1", "footer1"));
         }
     }
 
     @Test
     public void testGroupDeletion() {
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1);
-        //fizicheskoe udalenie gruppi so stranici, no ne iz spiska "before"
-        app.getGroupHelper().deleteSelectedGroups();
-        app.getGroupHelper().returnToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
+        app.group().delete(index);
+        List<GroupData> after = app.group().list();
         Assert.assertEquals(before.size() - 1, after.size());
 
         //udaliaem tot ze element iz spiska "before", chto i so stranici (before.size() - 1)
-        before.remove(before.size() - 1);
+        before.remove(index);
 
         //teper starii spisok "before" soderzit te ze elementi, chto i novii "after"
         Assert.assertEquals(before, after);
 
 
     }
+
 
 }
