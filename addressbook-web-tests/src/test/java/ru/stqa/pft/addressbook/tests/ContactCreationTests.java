@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
@@ -12,9 +14,17 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreation() {
         //peremennaya before soderzit spisok elementov tipa <ContactData>
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().createContact(new ContactData("firstname1", "lastname1", "groupname1"));
+        ContactData contact = new ContactData("firstname1", "lastname1", "groupname1");
+        app.getContactHelper().createContact(contact);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(before.size() + 1, after.size());
+
+        before.add(contact);
+        Comparator<? super ContactData> byId = (c1 , c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        //preobrazuem list v set, tak kak set ne imeet poriadka, i sravnim oba set
+        Assert.assertEquals(before, after);
     }
 
 }

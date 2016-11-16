@@ -93,8 +93,7 @@ public class ContactHelper extends HelperBase {
             //iz kazdogo elementa poluchaem tekst - imia gruppi
             String firstName = element.findElement(By.xpath(".//td[3]")).getText();
             String lastName = element.findElement(By.xpath(".//td[2]")).getText();
-            //int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String id = element.findElement(By.tagName("input")).getAttribute("value");
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData(id, firstName, lastName, null);
             //dobavlaem obekt "contact" v spisok
             contacts.add(contact);

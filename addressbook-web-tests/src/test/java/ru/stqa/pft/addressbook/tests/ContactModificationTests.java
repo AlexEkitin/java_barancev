@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -29,7 +30,13 @@ public class ContactModificationTests extends TestBase {
         before.remove(before.size() - 1);
         //dobavlaem v spisok element posle modofikacii
         before.add(contact);
+        //sortiruem dva list dla budusego sravneniia, tak kak posle modificiruemii
+        //kontakt mog peremestitsa v luboe mesto v list, a dla list vazen poriadok,
+        //i esle poriadok ne sovpadaet, to i dva list ne ravni
+        Comparator<? super ContactData> byId = (c1 , c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
         //preobrazuem list v set, tak kak set ne imeet poriadka, i sravnim oba set
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Assert.assertEquals(before, after);
     }
 }
