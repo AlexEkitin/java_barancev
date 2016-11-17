@@ -22,7 +22,7 @@ public class GroupModificationTests extends TestBase {
     public void ensurePreconditions(){
         app.goTo().groupPage();
         if (app.group().all().size() == 0){
-            app.group().create(new GroupData().withName("groupname1"));
+            app.group().create(new GroupData().withName("group1"));
         }
     }
 
@@ -33,7 +33,7 @@ public class GroupModificationTests extends TestBase {
         //pri modifikacii gruppi mi ukazivaem novie dannie, a id ostavlaem starii
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId())
-                .withName("groupname1")
+                .withName("group1")
                 .withHeader("header1")
                 .withFooter("footer1");
         app.group().modify(group);

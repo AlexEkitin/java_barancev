@@ -19,7 +19,7 @@ public class GroupCreationTests extends TestBase {
         app.goTo().groupPage();
         //spisok obektov tipa <GroupData>
         Groups before = app.group().all();
-        GroupData group = new GroupData().withName("groupname1");
+        GroupData group = new GroupData().withName("group1");
         app.group().create(group);
         Groups after = app.group().all();
         assertThat(before.size() + 1, equalTo(after.size()));
