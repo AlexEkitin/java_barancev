@@ -23,7 +23,7 @@ public class NavigationHelper extends HelperBase {
     }
 
     //check: if we are on the correct page, don't click
-    public void gotoHomePage() {
+    public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }

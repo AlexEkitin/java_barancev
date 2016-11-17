@@ -82,6 +82,7 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    //sozdanie i zapolnenie list dannimi so stranici - id i name
     public List<GroupData> list() {
         //sozdanie spiska "groups" tipa <GroupData>, kotorii budem zapolniat
         List<GroupData> groups = new ArrayList<GroupData>();

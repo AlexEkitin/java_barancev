@@ -13,6 +13,7 @@ public class ApplicationManager {
     WebDriver wd;
 
     // declaration without initialization
+    //eto atributi - peremennie klassa
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
@@ -54,7 +55,7 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 }

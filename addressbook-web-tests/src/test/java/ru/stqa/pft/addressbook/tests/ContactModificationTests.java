@@ -10,22 +10,25 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
+    //esli metod nachinaetsa s "get-", to eto oznachaet, chto etot metod nuzen dla
+    //doateupa k atributu (polu klassa)
+
     @BeforeMethod //proverka preduslovii
     public void ensurePreconditions(){
-        app.goTo().gotoHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("firstname1", "lastname1", "groupname1"));
+        app.goTo().homePage();
+        if (app.contact().list().size() == 0) {
+            app.contact().create(new ContactData("firstname1", "lastname1", "groupname1"));
         }
     }
 
     @Test//(enabled = false)
     public void testContactModification() {
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
         //pri modifikacii contacta vse meniaem, krome id
         ContactData contact = new ContactData(before.get(index).getId(), "newfirstname1", "newlastname1", "groupname1");
-        app.getContactHelper().modifyContact(index, contact);
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().modify(index, contact);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(before.size(), after.size());
 
         //uberaem iz spiska element do modifikacii

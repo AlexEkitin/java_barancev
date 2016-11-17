@@ -1,6 +1,8 @@
 package ru.stqa.pft.addressbook.model;
 
 public class GroupData {
+
+    //atributi - peremennie (polia) klassa
     //po umolchaniyu prisvaevaem samoe bolsoe chislo
     private int id = Integer.MAX_VALUE;;
     private String name;

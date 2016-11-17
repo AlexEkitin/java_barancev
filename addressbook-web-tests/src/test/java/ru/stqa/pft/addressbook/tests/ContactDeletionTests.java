@@ -12,25 +12,27 @@ public class ContactDeletionTests extends TestBase {
 
     @BeforeMethod //proverka preduslovii
     public void ensurePreconditions(){
-        app.goTo().gotoHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("firstname1", "lastname1", "groupname1"));
+        app.goTo().homePage();
+        if (app.contact().list().size() == 0) {
+            app.contact().create(new ContactData("firstname1", "lastname1", "groupname1"));
         }
     }
 
     @Test//(enabled = false)
     public void testContactDeletion() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().deleteSelectContacts();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        int index = before.size() - 1;
+        app.contact().delete(index);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(before.size() - 1, after.size());
 
         //udalaem iz before tot element, kotorii mi udalili so stranici
-        before.remove(before.size() - 1);
+        before.remove(index);
         //stavnivaem dva spiska
         Assert.assertEquals(before, after);
 
 
     }
+
+
 }
