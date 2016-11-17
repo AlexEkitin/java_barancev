@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -9,24 +10,26 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-    @Test//(enabled = false)
-    public void testContactModification() {
+    @BeforeMethod //proverka preduslovii
+    public void ensurePreconditions(){
         app.goTo().gotoHomePage();
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("firstname1", "lastname1", "groupname1"));
         }
+    }
+
+    @Test//(enabled = false)
+    public void testContactModification() {
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().chooseEditContact(before.size() - 1);
+        int index = before.size() - 1;
         //pri modifikacii contacta vse meniaem, krome id
-        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "newfirstname1", "newlastname1", "groupname1");
-        app.getContactHelper().fillContactForm((contact), false);
-        app.getContactHelper().submitContactModification();
-        app.getContactHelper().gotoHomePage();
+        ContactData contact = new ContactData(before.get(index).getId(), "newfirstname1", "newlastname1", "groupname1");
+        app.getContactHelper().modifyContact(index, contact);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(before.size(), after.size());
 
         //uberaem iz spiska element do modifikacii
-        before.remove(before.size() - 1);
+        before.remove(index);
         //dobavlaem v spisok element posle modofikacii
         before.add(contact);
         //sortiruem dva list dla budusego sravneniia, tak kak posle modificiruemii
@@ -38,4 +41,6 @@ public class ContactModificationTests extends TestBase {
         //preobrazuem list v set, tak kak set ne imeet poriadka, i sravnim oba set
         Assert.assertEquals(before, after);
     }
+
+
 }

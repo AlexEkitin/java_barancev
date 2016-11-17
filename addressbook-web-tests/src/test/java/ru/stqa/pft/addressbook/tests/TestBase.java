@@ -7,8 +7,10 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
     //created new object
+    //inicializiruetsa ApplicationManager
     protected final static ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
+    //zapuskaetsa brauzer
     @BeforeSuite
     public void setUp() throws Exception {
         app.init();
