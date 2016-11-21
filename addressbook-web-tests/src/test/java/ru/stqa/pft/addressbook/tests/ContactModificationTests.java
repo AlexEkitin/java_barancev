@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
@@ -23,28 +24,23 @@ public class ContactModificationTests extends TestBase {
 
     @Test//(enabled = false)
     public void testContactModification() {
-        List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
+        Set<ContactData> before = app.contact().all();
+        //vibiraem element sluchainim obrazom
+        ContactData modifiedContact = before.iterator().next();
         //pri modifikacii contacta vse meniaem, krome id
         ContactData contact = new ContactData()
-                .withId(before.get(index).getId())
+                .withId(modifiedContact.getId())
                 .withFirstname("newfirstname1")
                 .withLastname("newlastname1")
                 .withGroup("group1");
-        app.contact().modify(index, contact);
-        List<ContactData> after = app.contact().list();
+        app.contact().modify(contact);
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(before.size(), after.size());
 
         //uberaem iz spiska element do modifikacii
-        before.remove(index);
+        before.remove(modifiedContact);
         //dobavlaem v spisok element posle modofikacii
         before.add(contact);
-        //sortiruem dva list dla budusego sravneniia, tak kak posle modificiruemii
-        //kontakt mog peremestitsa v luboe mesto v list, a dla list vazen poriadok,
-        //i esle poriadok ne sovpadaet, to i dva list ne ravni
-        Comparator<? super ContactData> byId = (c1 , c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
         //preobrazuem list v set, tak kak set ne imeet poriadka, i sravnim oba set
         Assert.assertEquals(before, after);
     }
