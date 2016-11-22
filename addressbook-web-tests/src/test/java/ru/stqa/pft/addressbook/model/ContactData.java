@@ -10,6 +10,20 @@ public class ContactData {
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
+    private String allPhones;
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -60,19 +74,16 @@ public class ContactData {
         this.group = group;
         return this;
     }
-
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withHomePhone(String homePhone) {
         this.homePhone = homePhone;
         return this;
     }
-
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
         return this;
     }
-
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withWorkPhone(String workPhone) {
         this.workPhone = workPhone;

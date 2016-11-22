@@ -133,9 +133,10 @@ public class ContactHelper extends HelperBase {
             //razbivaet stroku na fragmenti i zapolnaem arrey
             //nasha stroka sostoit iz 3-h strok, dla razrezaniya po etim strokam ispolzuem
             //  \n  - eto perehod na novuyu stroku
-            String[] phones = cells.get(5).getText().split("\n");
+            //String[] phones = cells.get(5).getText().split("\n");
+            String allPhones = cells.get(5).getText();
             contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
-                    .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+                    .withAllPhones(allPhones));
         }
         return contacts;
     }
