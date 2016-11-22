@@ -1,13 +1,20 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.*;
 
 public class ContactModificationTests extends TestBase {
 
@@ -24,7 +31,7 @@ public class ContactModificationTests extends TestBase {
 
     @Test//(enabled = false)
     public void testContactModification() {
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         //vibiraem element sluchainim obrazom
         ContactData modifiedContact = before.iterator().next();
         //pri modifikacii contacta vse meniaem, krome id
@@ -34,15 +41,9 @@ public class ContactModificationTests extends TestBase {
                 .withLastname("newlastname1")
                 .withGroup("group1");
         app.contact().modify(contact);
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(before.size(), after.size());
-
-        //uberaem iz spiska element do modifikacii
-        before.remove(modifiedContact);
-        //dobavlaem v spisok element posle modofikacii
-        before.add(contact);
-        //preobrazuem list v set, tak kak set ne imeet poriadka, i sravnim oba set
-        Assert.assertEquals(before, after);
+        Contacts after = app.contact().all();
+        assertEquals(before.size(), after.size());
+        assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
     }
 
 

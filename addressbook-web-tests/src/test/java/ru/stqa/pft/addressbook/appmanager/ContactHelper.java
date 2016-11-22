@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -135,10 +136,9 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    //metod vozvrashaet set
-    public Set<ContactData> all() {
-        //sozdaem set tipa <ContactData>, kotorii budem zapolnat
-        Set<ContactData> contacts = new HashSet<ContactData>();
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
 
         //nahodim vse elementi na stranice i pomesaem ih v list
         //<WebElement> - eto specialnii tip, on propisan v biblioteke Selenium
@@ -150,10 +150,10 @@ public class ContactHelper extends HelperBase {
             String firstName = element.findElement(By.xpath(".//td[3]")).getText();
             String lastName = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            //kazdii raz dobavlaem novii obekt "contact" v set
+            //kazdii raz dobavlaem novii obekt "contact" v contacts
             contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
         }
-        return contacts;//vozvrashaem set
+        return contacts;
     }
 
 
