@@ -56,6 +56,8 @@ public class GroupHelper extends HelperBase {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        //spisok grupp pomenialsa, i cache nuzno obnulit
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -64,12 +66,16 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        //spisok grupp pomenialsa, i cache nuzno obnulit
+        groupCache = null;
         returnToGroupPage();
     }
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSelectedGroups();
+        //spisok grupp pomenialsa, i cache nuzno obnulit
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -78,7 +84,7 @@ public class GroupHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getGroupCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
@@ -102,15 +108,25 @@ public class GroupHelper extends HelperBase {
         return groups;
     }
 
+    //cache vnachale pust
+    private Groups groupCache = null;
+
     public Groups all() {
-        Groups groups = new Groups();
+        //esli cache ne pustoi, to nuzno vernut ego kopiyu
+        //kopiya nuzna, chtobi cache nikto ne isportil
+        if (groupCache != null){
+            return new Groups(groupCache);
+        }
+        //esli cache ne pustoi, to nuzno ego zapolnit, prochitav spisok grupp so stranici
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withName(name));
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        //vozvraschaem kopiyu
+        return new Groups(groupCache);
     }
 
 
