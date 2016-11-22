@@ -7,6 +7,9 @@ public class ContactData {
     private String firstname;
     private String lastname;
     private String group;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
 
     public int getId() {
         return id;
@@ -23,6 +26,19 @@ public class ContactData {
     public String getGroup() {
         return group;
     }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
 
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withId(int id) {
@@ -42,6 +58,24 @@ public class ContactData {
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withGroup(String group) {
         this.group = group;
+        return this;
+    }
+
+    //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
         return this;
     }
 

@@ -19,10 +19,10 @@ public class ContactCreationTests extends TestBase {
     @Test//(enabled = false)
     public void testContactCreation() {
         //peremennaya before soderzit spisok elementov tipa <ContactData>
-        Contacts before = app.contact().all();
+        Contacts before = app.contact().all2();
         ContactData contact = new ContactData().withFirstname("firstname1").withLastname("lastname1").withGroup("group1");
         app.contact().create(contact);
-        Contacts after = app.contact().all();
+        Contacts after = app.contact().all2();
         assertThat(before.size() + 1, equalTo(after.size()));
 
         //before.withAdded - eto kopiya obekta "before"

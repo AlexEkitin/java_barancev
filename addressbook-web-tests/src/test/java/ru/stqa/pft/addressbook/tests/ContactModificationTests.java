@@ -24,14 +24,14 @@ public class ContactModificationTests extends TestBase {
     @BeforeMethod //proverka preduslovii
     public void ensurePreconditions(){
         app.goTo().homePage();
-        if (app.contact().list().size() == 0) {
+        if (app.contact().all().size() == 0) {
             app.contact().create(new ContactData().withFirstname("firstname1").withLastname("lastname1").withGroup("group1"));
         }
     }
 
     @Test//(enabled = false)
     public void testContactModification() {
-        Contacts before = app.contact().all();
+        Contacts before = app.contact().all2();
         //vibiraem element sluchainim obrazom
         ContactData modifiedContact = before.iterator().next();
         //pri modifikacii contacta vse meniaem, krome id
@@ -41,7 +41,7 @@ public class ContactModificationTests extends TestBase {
                 .withLastname("newlastname1")
                 .withGroup("group1");
         app.contact().modify(contact);
-        Contacts after = app.contact().all();
+        Contacts after = app.contact().all2();
         assertEquals(before.size(), after.size());
         assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
     }
