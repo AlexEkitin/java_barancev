@@ -130,13 +130,11 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
-            //razbivaet stroku na fragmenti i zapolnaem arrey
-            //nasha stroka sostoit iz 3-h strok, dla razrezaniya po etim strokam ispolzuem
-            //  \n  - eto perehod na novuyu stroku
-            //String[] phones = cells.get(5).getText().split("\n");
             String allPhones = cells.get(5).getText();
+            String allEmails = cells.get(4).getText();
             contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
-                    .withAllPhones(allPhones));
+                    .withAllPhones(allPhones)
+                    .withAllEmails(allEmails));
         }
         return contacts;
     }
@@ -178,21 +176,25 @@ public class ContactHelper extends HelperBase {
 
 
     public ContactData infoFromEditForm(ContactData contact) {
+        //vibor kontakta po id
         initContactModificationById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
+                .withEmail(email).withEmail2(email2).withEmail3(email3);
 
     }
 
     private void initContactModificationById(int id) {
         //%s - mesto, kuda podstavlaetsa parametr
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
-
     }
 }
