@@ -7,6 +7,7 @@ public class ContactData {
     private String firstname;
     private String lastname;
     private String group;
+    private String address;
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
@@ -15,18 +16,6 @@ public class ContactData {
     private String email2;
     private String email3;
     private String allEmails;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getEmail2() {
-        return email2;
-    }
-
-    public String getEmail3() {
-        return email3;
-    }
 
     public String getAllPhones() {
         return allPhones;
@@ -57,6 +46,10 @@ public class ContactData {
         return group;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public String getHomePhone() {
         return homePhone;
     }
@@ -67,6 +60,18 @@ public class ContactData {
 
     public String getWorkPhone() {
         return workPhone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
     }
 
     public String getAllEmails() {
@@ -86,6 +91,11 @@ public class ContactData {
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withLastname(String lastname) {
         this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
