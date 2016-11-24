@@ -6,6 +6,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
+
 public class HelperBase {
     protected WebDriver wd;
 
@@ -29,6 +31,14 @@ public class HelperBase {
                 wd.findElement(locator).sendKeys(text);
             }
         }
+    }
+
+    //rabota s failom
+    protected void attach(By locator, File file) {
+        //don't touch the field, if new text for the field is "null"
+        if (file != null) {
+                wd.findElement(locator).sendKeys(file.getAbsolutePath());
+            }
     }
 
     public boolean isAlertPresent() {

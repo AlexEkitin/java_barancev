@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
 
     //po umolchaniu novomu kontaktu prisvaevaetsa samoe bolshoe celoe chislo
@@ -16,6 +18,8 @@ public class ContactData {
     private String email2;
     private String email3;
     private String allEmails;
+    private File photo;
+
 
     public String getAllPhones() {
         return allPhones;
@@ -78,6 +82,10 @@ public class ContactData {
         return allEmails;
     }
 
+    public File getPhoto() {
+        return photo;
+    }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withId(int id) {
         this.id = id;
@@ -137,6 +145,11 @@ public class ContactData {
     public ContactData withAllEmails(String allEmails) {
         this.allEmails = allEmails;
         //return this - nuzno dla vitagivaniya v cipochku
+        return this;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 

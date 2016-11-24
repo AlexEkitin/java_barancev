@@ -34,6 +34,7 @@ public class ContactHelper extends HelperBase {
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"),contactData.getFirstname());
         type(By.name("lastname"),contactData.getLastname());
+        attach(By.name("photo"), contactData.getPhoto());
 
         //pri sozdanii kontakta est vibor gruppi, pri modificacii - net
         if (creation){
