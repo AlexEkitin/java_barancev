@@ -120,7 +120,7 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    //sbor informacii so stranici kontaktov
+    //sbor informacii obo vseh polah vseh kontaktov so stranici kontaktov
     public Set<ContactData> all() {
         Set<ContactData> contacts = new HashSet<ContactData>();
         //nahodim vse elementi i pomesaem ih v list
@@ -128,13 +128,17 @@ public class ContactHelper extends HelperBase {
         //WebElement - tip, rows - nazvaie spiska
         //row - peremennaya, kotoraya posledovatelno ukazivaet na vse elementu spiska "rows"
         for (WebElement row : rows) {
+            //iz kazdogo elementa poluchaem tekst
             List<WebElement> cells = row.findElements(By.tagName("td"));
+
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
             String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
             String allPhones = cells.get(5).getText();
+
+            //kazdii raz dobavlaem novii obekt "contact" v contacts
             contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
                     .withAddress(address)
                     .withAllPhones(allPhones)
@@ -149,7 +153,7 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.xpath(".//*[@name='entry']"));
         //element - peremennaya, kotoraya probegaet po spisku "elements"
         for (WebElement element : elements) {
-            //iz kazdogo elementa poluchaem tekst - imia gruppi
+            //iz kazdogo elementa poluchaem tekst
             String firstName = element.findElement(By.xpath(".//td[3]")).getText();
             String lastName = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
@@ -178,6 +182,18 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
+    public ContactData infoFromViewForm(ContactData contact) {
+        initContactView(contact.getId());
+        String info[] = wd.findElement(By.id("content")).getText().replaceAll("[-():]", "").replaceAll("[MWH]", "")
+                .replaceAll("\\n+\\s*", "\n").replaceFirst(" ", "\n").split("\n");
+        String email = wd.findElement(By.xpath("//a[contains(@href, 'mailto:E-mail')]")).getText();
+        String email2 = wd.findElement(By.xpath("//a[contains(@href, 'mailto:E-mail2')]")).getText();
+        String email3 = wd.findElement(By.xpath("//a[contains(@href, 'mailto:E-mail3')]")).getText();
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstname(info[0]).withLastname(info[1]).
+                withAddress(info[2]).withHomePhone(info[3]).withMobilePhone(info[4]).withWorkPhone(info[5]).
+                withEmail(email).withEmail2(email2).withEmail3(email3);
+    }
 
     //sobiraem informaciyu s formi redaktirovaniya
     public ContactData infoFromEditForm(ContactData contact) {
@@ -201,6 +217,12 @@ public class ContactHelper extends HelperBase {
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
 
     }
+
+    //viberaem kontakt dla prosmotra informacii po id
+    private void initContactView(int id){
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']",id))).click();
+    }
+
 
     //viberaem kontakt dla modofikacii po id
     private void initContactModificationById(int id) {

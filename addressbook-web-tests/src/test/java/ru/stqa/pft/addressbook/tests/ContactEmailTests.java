@@ -22,7 +22,7 @@ public class ContactEmailTests extends TestBase {
     }
 
     @Test
-    public void testContactPhones() {
+    public void testContactEmails() {
         app.goTo().homePage();
         //berem list kontaktov, iz nego vibiraem odin sluchainim obrazom
         ContactData contact = app.contact().all().iterator().next();
