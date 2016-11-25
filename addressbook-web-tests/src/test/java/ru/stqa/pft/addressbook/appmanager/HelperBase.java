@@ -37,7 +37,7 @@ public class HelperBase {
     protected void attach(By locator, File file) {
         //don't touch the field, if new text for the field is "null"
         if (file != null) {
-            //file.getAbsolutePath() - absolutnii put k failu
+            //file.getAbsolutePath() - preobrazovivaet absolutnii put k failu v otnositelnii
             wd.findElement(locator).sendKeys(file.getAbsolutePath());
         }
     }
