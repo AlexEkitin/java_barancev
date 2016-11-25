@@ -21,7 +21,7 @@ public class GroupCreationTests extends TestBase {
         //dla kazdo array zapuskaetsa novii test
         list.add(new Object[]{new GroupData().withName("test1").withHeader("header1").withFooter("footer1")});
         list.add(new Object[]{new GroupData().withName("test2").withHeader("header2").withFooter("footer2")});
-        list.add(new Object[]{new GroupData().withName("test3").withHeader("header3").withFooter("footer3")});
+        list.add(new Object[]{new GroupData().withName("test3").withHeader("header3").withFooter("footer3")}) ;
         return list.iterator();
     }
 
