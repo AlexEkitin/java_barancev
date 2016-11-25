@@ -91,11 +91,13 @@ public class ContactData {
         this.id = id;
         return this;
     }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
         return this;
     }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withLastname(String lastname) {
         this.lastname = lastname;
@@ -106,21 +108,25 @@ public class ContactData {
         this.address = address;
         return this;
     }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withGroup(String group) {
         this.group = group;
         return this;
     }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withHomePhone(String homePhone) {
         this.homePhone = homePhone;
         return this;
     }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
         return this;
     }
+
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
     public ContactData withWorkPhone(String workPhone) {
         this.workPhone = workPhone;

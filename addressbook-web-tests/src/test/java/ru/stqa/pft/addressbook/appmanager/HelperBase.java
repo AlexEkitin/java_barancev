@@ -26,7 +26,7 @@ public class HelperBase {
         if (text != null) {
             String existingText = wd.findElement(locator).getAttribute("value");
             //don't touch the field, if new text equal old text
-            if (! text.equals(existingText)) {
+            if (!text.equals(existingText)) {
                 wd.findElement(locator).clear();
                 wd.findElement(locator).sendKeys(text);
             }
@@ -37,8 +37,8 @@ public class HelperBase {
     protected void attach(By locator, File file) {
         //don't touch the field, if new text for the field is "null"
         if (file != null) {
-                wd.findElement(locator).sendKeys(file.getAbsolutePath());
-            }
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());
+        }
     }
 
     public boolean isAlertPresent() {

@@ -39,17 +39,17 @@ public class GroupDataGenerator {
 
     private static void save(List<GroupData> groups, File file) throws IOException {
         Writer writer = new FileWriter(file);
-        for (GroupData group : groups){
-            writer.write(String.format("%s; %s; %s\n", group.getName(),group.getHeader(), group.getFooter()));
+        for (GroupData group : groups) {
+            writer.write(String.format("%s; %s; %s\n", group.getName(), group.getHeader(), group.getFooter()));
         }
         writer.close();
     }
 
     private List<GroupData> generateGroups(int count) {
         List<GroupData> groups = new ArrayList<GroupData>();
-        for (int i=0; i<count; i++){
+        for (int i = 0; i < count; i++) {
             groups.add(new GroupData().withName(String.format("test %s", i))
-            .withHeader(String.format("header %s", i)).withFooter(String.format("footer %s", i)));
+                    .withHeader(String.format("header %s", i)).withFooter(String.format("footer %s", i)));
         }
         return groups;
     }
