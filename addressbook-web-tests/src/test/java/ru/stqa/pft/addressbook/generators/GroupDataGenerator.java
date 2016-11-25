@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
@@ -40,10 +41,19 @@ public class GroupDataGenerator {
         if (format.equals("csv")){
             saveAsCsv(groups, new File(file));
         } else if (format.equals("xml")) {
-            saveAsEml(groups, new File(file));
+            saveAsXml(groups, new File(file));
         } else{
             System.out.println("Unrecognized format " + format);
         }
+    }
+
+    private void saveAsXml(List<GroupData> groups, File file) throws IOException {
+        XStream xstream = new XStream();
+        xstream.processAnnotations(GroupData.class);
+        String xml = xstream.toXML(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
     }
 
     private static void saveAsCsv(List<GroupData> groups, File file) throws IOException {
