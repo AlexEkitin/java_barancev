@@ -21,6 +21,7 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreation() {
         //peremennaya before soderzit spisok elementov tipa <ContactData>
         Contacts before = app.contact().all2();
+        //put k failu otnositelno rabochei derrictorii "addressbook-web-tests"
         File photo = new File("src/test/resources/stru.png");
         ContactData contact = new ContactData().withFirstname("firstname1").withLastname("lastname1").withGroup("group1").withPhoto(photo);
         app.contact().create(contact);

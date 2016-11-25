@@ -33,10 +33,11 @@ public class HelperBase {
         }
     }
 
-    //rabota s failom
+    //rabota s failom, vipolnaiet komandu "sendKeys", no ne vipolnaet "click"
     protected void attach(By locator, File file) {
         //don't touch the field, if new text for the field is "null"
         if (file != null) {
+            //file.getAbsolutePath() - absolutnii put k failu
             wd.findElement(locator).sendKeys(file.getAbsolutePath());
         }
     }
