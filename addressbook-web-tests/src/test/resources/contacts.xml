@@ -1,18 +1,15 @@
 <list>
   <contact>
-    <id>2147483647</id>
     <firstname>Firstname0</firstname>
     <lastname>Lastname0</lastname>
     <group>test0</group>
   </contact>
   <contact>
-    <id>2147483647</id>
     <firstname>Firstname1</firstname>
     <lastname>Lastname1</lastname>
     <group>test1</group>
   </contact>
   <contact>
-    <id>2147483647</id>
     <firstname>Firstname2</firstname>
     <lastname>Lastname2</lastname>
     <group>test2</group>

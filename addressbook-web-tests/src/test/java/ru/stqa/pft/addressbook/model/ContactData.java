@@ -1,12 +1,14 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import java.io.File;
 
 @XStreamAlias("contact")
 public class ContactData {
 
+    @XStreamOmitField //propuskaet eto pole pri zapolnenii xml faila
     //po umolchaniu novomu kontaktu prisvaevaetsa samoe bolshoe celoe chislo
     private int id = Integer.MAX_VALUE;
     private String firstname;

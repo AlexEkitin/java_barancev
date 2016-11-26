@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import com.thoughtworks.xstream.XStream;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
@@ -10,6 +11,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -24,19 +26,24 @@ public class ContactCreationTests extends TestBase {
         //spisok massivov
         List<Object[]> list = new ArrayList<Object[]>();
         //sozdaetsa obekt tipa "BufferedReader", i cherez nego proishodit chtenie dannih iz faila
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+        String xml = "";
         //readLine() - chitaet stroku i srazu ee vozvrachaet
         String line = reader.readLine();
-        //cikl nuzet, tak kak mi ne znaem skolko strok budet v faile
+        //cikl "while" nuzet, tak kak mi ne znaem skolko strok budet v faile
         while (line != null) {
-            //delim kazduu stroku na chasti, metkoi dla deleniia bedet ';'
-            String[] split = line.split(";");
-            //iz poluchenih kusochkov stroim massiv iz odnogo obekta
-            //i dobavlaem ego v List<Object[]> list = new ArrayList<Object[]>()
-            list.add(new Object[] {new ContactData().withFirstname(split[0]).withLastname(split[1]).withGroup(split[2])});
+            //dobavlaem strochki k peremennoi "xml"
+            xml += line;
             line = reader.readLine();
         }
-        return list.iterator();
+        XStream xstream = new XStream();
+        //xstream obrabativaet annotacii v klasse "ContactData.class"
+        xstream.processAnnotations(ContactData.class);
+        List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
+        //k kazdomu obektu v potoke primeniaem funkciu, kotoraya zavorachivaet obekt v massiv,
+        //sostoiachii iz odnogo etogo ibekta
+        //collect(Collectors.toList()) - iz stream delaet list
+        return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
 
     @Test(dataProvider = "validContacts")

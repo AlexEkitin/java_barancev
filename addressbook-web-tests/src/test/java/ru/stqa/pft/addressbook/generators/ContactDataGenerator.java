@@ -66,7 +66,8 @@ public class ContactDataGenerator {
     //file - eto fail, v kotorii nuzno sohranat
     private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
         XStream xstream = new XStream();
-        //teg "contact" teper ispolzuetsa pri sozdanii kazdoi novoi gruppi v faike
+        //teg "contact" teper ispolzuetsa pri sozdanii kazdoi novoi gruppi v faile
+        //mi govorim, chto xstream dolzen obrabotat annotacii
         xstream.processAnnotations(ContactData.class);
         //prevrashaem iz obekta "contacts" v stroku v formate xml
         String xml = xstream.toXML(contacts);
