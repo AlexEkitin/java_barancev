@@ -59,7 +59,7 @@ public class ContactDataGenerator {
         //zapolniaem list znacheniuami
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("Firstname%s", i))
-                    .withLastname(String.format("Lastname%s", i)));
+                    .withLastname(String.format("Lastname%s", i)).withGroup(String.format("test%s", i)));
         }
         return contacts;
     }
@@ -71,7 +71,7 @@ public class ContactDataGenerator {
         Writer writer = new FileWriter(file);
         //dla kazdogo kontakta v faile budet sozdana otdelnaya srtoka s informaciei o kontakte
         for (ContactData contact : contacts) {
-            writer.write(String.format("%s; %s\n", contact.getFirstname(), contact.getLastname()));
+            writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getGroup()));
         }
         //zakritie faila, to est vsa sgenerirovannaya informaciya o kontaktah zapisivaetsa na disk
         writer.close();
