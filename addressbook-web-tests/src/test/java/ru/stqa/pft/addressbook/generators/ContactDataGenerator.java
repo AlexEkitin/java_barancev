@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -51,16 +53,29 @@ public class ContactDataGenerator {
     private void run() throws IOException {
         //generaciya dannih
         List<ContactData> contacts = generateContacts(count);
-        if (format.equals("csv")){
+        if (format.equals("csv")) {
             //sohranenie dannih v fail
             //new File(file) - preobrazovivaem iz tipa String v tip File
             saveAsCsv(contacts, new File(file));
         } else if (format.equals("xml")) {
             saveAsXml(contacts, new File(file));
-        } else {
-            System.out.println("Unrecognized format "+ format);
-        }
+        } else if (format.equals("json")) {
+            saveAsJson(contacts, new File(file));
+        } else
+            System.out.println("Unrecognized format " + format);
     }
+
+    private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(contacts);
+        //otkrivaem fail na zapis
+        Writer writer = new FileWriter(file);
+        //zapisivaem dannie v fail
+        writer.write(json);
+        //zakrivaem fail
+        writer.close();
+    }
+
 
     //contacts - eto spisok contactov, kotorii nuzno sohranat
     //file - eto fail, v kotorii nuzno sohranat

@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -11,8 +12,11 @@ public class ContactData {
     @XStreamOmitField //propuskaet eto pole pri zapolnenii xml faila
     //po umolchaniu novomu kontaktu prisvaevaetsa samoe bolshoe celoe chislo
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String group;
     private String address;
     private String homePhone;
