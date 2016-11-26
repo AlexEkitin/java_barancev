@@ -3,13 +3,13 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.channels.Channel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,9 @@ public class ContactDataGenerator {
     //put k failu
     @Parameter(names = "-f", description = "Target file")
     public String file;
-
+    //format faila
+    @Parameter(names = "-d", description = "Data format")
+    public String format;
 
     //cherez komandnuiu stroku mi peredaem 2 parametra:
     public static void main(String[] args) throws IOException {
@@ -34,7 +36,7 @@ public class ContactDataGenerator {
         //sozdaem obekt tipa "JCommander", parametr "generator" - eto obekt, v kotorom
         //dolzni bit zapolneni sootvetstvuyusie atributi
         JCommander jCommander = new JCommander(generator);
-        try{
+        try {
             //parametr "args" - eto opcii, kotorie peredautsa v komandnoi stroke
             jCommander.parse(args);
         } catch (ParameterException ex) {
@@ -49,9 +51,31 @@ public class ContactDataGenerator {
     private void run() throws IOException {
         //generaciya dannih
         List<ContactData> contacts = generateContacts(count);
-        //sohranenie dannih v fail
-        //new File(file) - preobrazovivaem iz tipa String v tip File
-        save(contacts, new File(file));
+        if (format.equals("csv")){
+            //sohranenie dannih v fail
+            //new File(file) - preobrazovivaem iz tipa String v tip File
+            saveAsCsv(contacts, new File(file));
+        } else if (format.equals("xml")) {
+            saveAsXml(contacts, new File(file));
+        } else {
+            System.out.println("Unrecognized format "+ format);
+        }
+    }
+
+    //contacts - eto spisok contactov, kotorii nuzno sohranat
+    //file - eto fail, v kotorii nuzno sohranat
+    private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
+        XStream xstream = new XStream();
+        //teg "contact" teper ispolzuetsa pri sozdanii kazdoi novoi gruppi v faike
+        xstream.processAnnotations(ContactData.class);
+        //prevrashaem iz obekta "contacts" v stroku v formate xml
+        String xml = xstream.toXML(contacts);
+        //otkrivaem fail na zapis
+        Writer writer = new FileWriter(file);
+        //zapisivaem dannie v fail
+        writer.write(xml);
+        //zakrivaem fail
+        writer.close();
     }
 
     private List<ContactData> generateContacts(int count) {
@@ -66,7 +90,7 @@ public class ContactDataGenerator {
 
     //kazdii kontakt sohraniaetsa f fail v vide otdelnoi stroki, Firstname i Lastnamerazdeleni ;
     //IOException - pri vozniknovenii Exception ono ne perehvativaetsa, a otpravlaetsa na 1 stupupen vverh
-    private void save(List<ContactData> contacts, File file) throws IOException {
+    private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
         //otkrivaem fail na zapis
         Writer writer = new FileWriter(file);
         //dla kazdogo kontakta v faile budet sozdana otdelnaya srtoka s informaciei o kontakte
