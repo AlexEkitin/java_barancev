@@ -76,7 +76,7 @@ public class ContactCreationTests extends TestBase {
     }
 
 
-    @Test(dataProvider = "validContactsFromJson")
+    @Test(dataProvider = "validContactsFromXml")
     public void testContactCreation(ContactData contact) {
         //peremennaya before soderzit spisok elementov tipa <ContactData>
         Contacts before = app.contact().all2();
