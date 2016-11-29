@@ -57,7 +57,7 @@ public class GroupCreationTests extends TestBase {
         }
     }
 
-    @Test(dataProvider = "validGroupsFromJson")
+    @Test(dataProvider = "validGroupsFromXml")
     public void testGroupCreation(GroupData group) {
         app.goTo().groupPage();
         //spisok obektov tipa <GroupData>

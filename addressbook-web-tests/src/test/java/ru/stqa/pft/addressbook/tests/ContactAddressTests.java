@@ -26,7 +26,7 @@ public class ContactAddressTests extends TestBase  {
             app.contact().create(new ContactData()
                     .withFirstname(properties.getProperty("contactFirstname"))
                     .withLastname(properties.getProperty("contactLastname"))
-                    .withGroup(properties.getProperty("contactGroup"))
+                    .withGroup(properties.getProperty("contactPreconditionGroup"))
                     .withAddress(properties.getProperty("contactAddress"))
                     .withHomePhone(properties.getProperty("contactHomePhone"))
                     .withMobilePhone(properties.getProperty("contactMobilePhone"))
