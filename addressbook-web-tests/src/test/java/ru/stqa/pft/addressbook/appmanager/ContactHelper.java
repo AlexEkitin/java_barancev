@@ -184,9 +184,9 @@ public class ContactHelper extends HelperBase {
         initContactView(contact.getId());
         String info[] = wd.findElement(By.id("content")).getText().replaceAll("[-():]", "").replaceAll("[MWH]", "")
                 .replaceAll("\\n+\\s*", "\n").replaceFirst(" ", "\n").split("\n");
-        String email = wd.findElement(By.xpath("//a[contains(@href, 'mailto:E-mail')]")).getText();
-        String email2 = wd.findElement(By.xpath("//a[contains(@href, 'mailto:E-mail2')]")).getText();
-        String email3 = wd.findElement(By.xpath("//a[contains(@href, 'mailto:E-mail3')]")).getText();
+        String email = wd.findElement(By.xpath(String.format("//div/div[4]/a[1]"))).getText();
+        String email2 = wd.findElement(By.xpath(String.format("//div/div[4]/a[2]"))).getText();
+        String email3 = wd.findElement(By.xpath(String.format("//div/div[4]/a[3]"))).getText();
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(info[0]).withLastname(info[1]).
                 withAddress(info[2]).withHomePhone(info[3]).withMobilePhone(info[4]).withWorkPhone(info[5]).
