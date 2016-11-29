@@ -8,14 +8,14 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ContactDataGenerator {
+
+    public Properties properties = new Properties();
 
     //sozdaem pola, komorie budut otobrozat onformaciyu na komandnoi stroke,
     //esli programma padaet
@@ -94,12 +94,16 @@ public class ContactDataGenerator {
         writer.close();
     }
 
-    private List<ContactData> generateContacts(int count) {
+    private List<ContactData> generateContacts(int count) throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         List<ContactData> contacts = new ArrayList<ContactData>();
         //zapolniaem list znacheniuami
         for (int i = 0; i < count; i++) {
-            contacts.add(new ContactData().withFirstname(String.format("Firstname%s", i))
-                    .withLastname(String.format("Lastname%s", i)).withGroup(String.format("test%s", i)));
+            contacts.add(new ContactData()
+                    .withFirstname(String.format(properties.getProperty("contactFirstname")+i))
+                    .withLastname(String.format(properties.getProperty("contactLastname")+i))
+                    .withGroup(String.format(properties.getProperty("contactGroup")+i)));
         }
         return contacts;
     }

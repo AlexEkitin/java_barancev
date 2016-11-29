@@ -8,14 +8,14 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class GroupDataGenerator {
+
+    public Properties properties = new Properties();
 
     @Parameter(names = "-c", description = "Group count")
     public int count;
@@ -76,11 +76,15 @@ public class GroupDataGenerator {
         }
     }
 
-    private List<GroupData> generateGroups(int count) {
+    private List<GroupData> generateGroups(int count) throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         List<GroupData> groups = new ArrayList<GroupData>();
         for (int i = 0; i < count; i++) {
-            groups.add(new GroupData().withName(String.format("test%s", i))
-                    .withHeader(String.format("header%s", i)).withFooter(String.format("footer%s", i)));
+            groups.add(new GroupData()
+                    .withName(String.format(properties.getProperty("groupName")+i))
+                    .withHeader(String.format(properties.getProperty("groupHeader")+i))
+                    .withFooter(String.format(properties.getProperty("groupFooter")+i)));
         }
         return groups;
     }
