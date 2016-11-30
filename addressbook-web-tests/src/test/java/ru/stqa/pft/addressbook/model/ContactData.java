@@ -27,6 +27,8 @@ public class ContactData {
     @Transient
     private String group;
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
     @Expose
     @Column(name="home")
@@ -43,12 +45,20 @@ public class ContactData {
     @Transient
     private String allPhones;
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
+    @Transient
     private String allEmails;
+
     @Column(name="photo")
     @Type(type = "text")
     private String photo;
