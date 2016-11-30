@@ -3,30 +3,44 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
-
+@Entity
+@Table(name="addressbook")
 @XStreamAlias("contact")
 public class ContactData {
 
+    @Id
+    @Column(name="id")
     @XStreamOmitField //propuskaet eto pole pri zapolnenii xml faila
     //po umolchaniu novomu kontaktu prisvaevaetsa samoe bolshoe celoe chislo
     private int id = Integer.MAX_VALUE;
     @Expose
+    @Column(name="firstname")
     private String firstname;
     @Expose
+    @Column(name="lastname")
     private String lastname;
     @Expose
+    @Transient
     private String group;
     @Expose
     private String address;
     @Expose
+    @Column(name="home")
+    @Type(type = "text")
     private String homePhone;
     @Expose
+    @Column(name="mobile")
+    @Type(type = "text")
     private String mobilePhone;
     @Expose
+    @Column(name="work")
+    @Type(type = "text")
     private String workPhone;
-
+    @Transient
     private String allPhones;
     @Expose
     private String email;
@@ -35,7 +49,9 @@ public class ContactData {
     @Expose
     private String email3;
     private String allEmails;
-    private File photo;
+    @Column(name="photo")
+    @Type(type = "text")
+    private String photo;
 
 
     public String getAllPhones() {
@@ -95,7 +111,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     //etot metod vizvrashaet tot ze obekt, v kotorom on vizvan
@@ -205,7 +221,7 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
