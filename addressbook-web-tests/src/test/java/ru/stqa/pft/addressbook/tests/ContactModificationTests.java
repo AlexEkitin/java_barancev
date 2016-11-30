@@ -30,28 +30,29 @@ public class ContactModificationTests extends TestBase {
 
     @BeforeMethod //proverka preduslovii
     public void ensurePreconditions() throws IOException {
-        String target = System.getProperty("target", "local");
-        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-        app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
+            String target = System.getProperty("target", "local");
+            properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+            app.goTo().homePage();
             app.contact().create(new ContactData()
                     .withFirstname(properties.getProperty("contactFirstname"))
                     .withLastname(properties.getProperty("contactLastname"))
-                    .withGroup(properties.getProperty("contactPreconditionGroup"))
-                    .withAddress(properties.getProperty("contactAddress"))
-                    .withHomePhone(properties.getProperty("contactHomePhone"))
-                    .withMobilePhone(properties.getProperty("contactMobilePhone"))
-                    .withWorkPhone(properties.getProperty("contactWorkPhone"))
-                    .withEmail1(properties.getProperty("contactEmail1"))
-                    .withEmail2(properties.getProperty("contactEmail2"))
-                    .withEmail3(properties.getProperty("contactEmail3")));
+                    //.withGroup(properties.getProperty("contactPreconditionGroup"))
+                    //.withAddress(properties.getProperty("contactAddress"))
+                    //.withHomePhone(properties.getProperty("contactHomePhone"))
+                    //.withMobilePhone(properties.getProperty("contactMobilePhone"))
+                    //.withWorkPhone(properties.getProperty("contactWorkPhone"))
+                    //.withEmail1(properties.getProperty("contactEmail1"))
+                    //.withEmail2(properties.getProperty("contactEmail2"))
+                    //.withEmail3(properties.getProperty("contactEmail3"))
+                    );
         }
     }
 
-    @Test//(enabled = false)
+    @Test
     public void testContactModification() {
 
-        Contacts before = app.contact().all2();
+        Contacts before = app.db().contacts();
         //vibiraem element sluchainim obrazom
         ContactData modifiedContact = before.iterator().next();
         //pri modifikacii contacta vse meniaem, krome id
@@ -66,8 +67,9 @@ public class ContactModificationTests extends TestBase {
                 .withEmail1(properties.getProperty("contactNewEmail1"))
                 .withEmail2(properties.getProperty("contactNewEmail2"))
                 .withEmail3(properties.getProperty("contactNewEmail3"));
+        app.goTo().homePage();
         app.contact().modify(contact);
-        Contacts after = app.contact().all2();
+        Contacts after = app.db().contacts();
         assertEquals(before.size(), after.size());
         assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
     }

@@ -34,7 +34,7 @@ public class ContactHelper extends HelperBase {
         //contactData.getLastname() - peredaem v kachestve parametra "lastname"
         type(By.name("lastname"), contactData.getLastname());
         //contactData.getPhoto() - peredaem v kachestve parametra sam fail
-        attach(By.name("photo"), contactData.getPhoto());
+        //attach(By.name("photo"), contactData.getPhoto());
 
         //pri sozdanii kontakta est vibor gruppi, pri modificacii - net
         if (creation) {

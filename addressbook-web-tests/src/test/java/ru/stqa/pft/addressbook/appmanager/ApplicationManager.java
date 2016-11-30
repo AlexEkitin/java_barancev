@@ -38,6 +38,7 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         //zagruzaem konfiguracionnii fail
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
         dbHelper = new DbHelper();
 
         if (browser.equals(BrowserType.CHROME)) {
@@ -58,8 +59,6 @@ public class ApplicationManager {
         sessionHelper = new SessionHelper(wd);
         //znacheniya obektov budut zagruzatsa iz konfiguracionnogo faila
         sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
-
-
     }
 
     public void stop() {
