@@ -4,6 +4,7 @@ mainClassName = "ru.stqa.pft.sandbox.Program"
 
 repositories {
     mavenCentral()
+
 }
 
 dependencies {
